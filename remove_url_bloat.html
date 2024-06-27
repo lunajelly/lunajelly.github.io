@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remove bloat on Amazon links</title>
+
+    <meta name="keywords" content="clean, amazon, analytics, bloat, links, unbloat, shorten">
+    <meta name="description" content="Clean Amazon links of analytics bloat">
+    
+    <!-- better be mobile friendly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        h1 {
+            /* less bombastic */
+            font-size: large;
+        }
+
+        #disclaimer{
+            position: relative;
+            bottom: 1em;
+            font-size: small;
+            color: #455dbb;
+        }
+
+        #error{
+            font-size: small;
+            color: rgb(0, 0, 236);
+        }
+         
+        #output-link {
+        /*rounded border*/
+        border: 2px solid rgb(159, 157, 157);
+        border-radius: 25px;
+
+        /* Give the text some breathing room on left edge */
+        padding-left: 1vw;
+
+        /* text styles */
+        color: rgb(17, 6, 114);
+        font-family: 'Courier New', Courier, monospace;
+
+        /* Force height of div to be retained and the same even if empty instead of collapsing */
+        min-height: 1em;
+
+        }
+
+    /* tooltip */
+
+    #tooltip {
+        visibility: hidden; /*hide by default, Show tooltip only on mouseover output link 1/2*/
+    
+        color: white; /* Text color */
+        background-color: #555;
+        display: inline-block; /* Fit width to content */
+
+        padding: 5px; /* breathing room for text */
+
+        border-radius: 6px; /* rounded border */ 
+
+        /* small distance from output-link vertically */
+        position: relative; /* to itself */
+        top: 10px; 
+
+
+        /* Fade in gently pt 1/2*/
+        opacity: 0%;
+        transition: opacity 0.4s;
+
+    }
+
+    #output-link-envelope:hover #tooltip {
+        visibility: visible; /* Show tooltip only on mouseover output link 2/2 */
+
+        /* Fade in gently pt 2/2 */
+        opacity: 100%;
+    }
+
+
+
+
+    </style>
+    <script>
+    
+    //copy output link on click
+    function copyOutputLink(){
+        let copyText = document.getElementById("output-link").textContent;
+        navigator.clipboard.writeText(copyText);
+        document.getElementById("tooltip").textContent="Text Copied!";
+    }
+
+    function resetTooltip(){
+        document.getElementById("tooltip").textContent="Click to copy";
+
+    }
+
+    //strip amzn link of ref
+    function amazonLinkClean() {
+        let inputLink = document.getElementById("input-link").value.trim(); //trim removes whitespace from begin&end
+
+        console.log(inputLink);
+
+        // remove the "ref=" gunk
+
+        let indexOfFirstChar = inputLink.lastIndexOf("/"); //Gives Index of the first character of the search string, search from end
+
+        if (indexOfFirstChar === -1){
+
+            console.log("errow");
+
+            document.getElementById("error").innerText = "Cannot find anything to unbloat.  If a link should have been cleaned up but wasn't, feel free to open an issue on GitHub with the site's name / something referring to it in the title.";
+
+            document.getElementById("output-link").textContent = inputLink;
+
+            return;
+        }
+
+        let outputLink = inputLink.substring(0,indexOfFirstChar);
+
+        document.getElementById("output-link").textContent = outputLink;
+
+        document.getElementById("error").innerText = "";
+
+        console.log(indexOfFirstChar);
+
+        console.log(outputLink);
+ 
+        console.log("gg");
+
+    }
+
+    //bind fns to interface
+    addEventListener("DOMContentLoaded", (event) => {
+
+        //output-link 
+        let outputlink = document.getElementById("output-link");
+
+        //bind copy on clicking output-link
+        outputlink.addEventListener("click", copyOutputLink);
+
+        document.getElementById("output-link-envelope").addEventListener("mouseleave", resetTooltip);
+
+        //bind mechanism to unbloat button
+        document.getElementById("unbloat").addEventListener("click", amazonLinkClean);
+    });
+    </script>
+</head>
+<body>
+    <h1>Remove bloat on Amazon links</h1>
+    <p>Clean Amazon links of analytics bloat</p>
+    <p id="disclaimer">*May do weird things to non-Amazon links</p>
+    <label for="input-link">Enter link here:</label>
+    <input id="input-link" type="text"></input>
+    <button id="unbloat" type="button" role="button" aria-pressed="false">Unbloat!</button>
+    <br>
+    <p id="error" aria-live="polite"></p>
+    <br>
+
+    <div id="output-link-envelope">
+    <!--div envelope is for proper tooltip display-->
+    <label for="output-link">Cleaned-up link:</label>
+    <div id="output-link" readonly aria-live="polite" tabindex="0"></div>
+    <div id="tooltip" aria-live="polite">Click to copy</div>
+    </div>
+    <!-- for blind- aria-lives clear refresh aria-relevant=all -->
+</body>
+
+
+<!-- self-review: sick but solid, managed to not hurt hands further.
+cs  method: deck + vscode + ps4knockoff ctrller=14oz + tablet + voice2txt + gdoc
+ s-->
+</html>
