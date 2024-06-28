@@ -10,6 +10,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+
+        body {
+            font-size: medium;
+        }
+
+
+
         h1 {
             /* less bombastic */
             font-size: large;
@@ -105,7 +112,7 @@
 
         if (indexOfFirstChar === -1){
 
-            document.getElementById("error").innerText = "Cannot find anything to unbloat.  If a link should have been cleaned up but wasn't, feel free to open an issue on GitHub with 'Remove bloat on Amazon links' in title & the link";
+            document.getElementById("error").innerText = "Cannot find anything to unbloat.  If a link should have been cleaned up but wasn't, feel free to open an issue on GitHub with 'remove_url_bloat' in title & the link";
 
             document.getElementById("output-link").textContent = inputLink;
 
