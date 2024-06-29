@@ -51,10 +51,10 @@
 
         }
 
-    /* tooltip */
+    /* copy-tooltip */
 
-    #tooltip {
-        visibility: hidden; /*hide by default, Show tooltip only on mouseover output link 1/2*/
+    #copy-tooltip {
+        visibility: hidden; /*hide by default, Show copy-tooltip only on mouseover output link 1/2*/
     
         color: white; /* Text color */
         background-color: #555;
@@ -75,8 +75,8 @@
 
     }
 
-    #output-link-envelope:hover #tooltip {
-        visibility: visible; /* Show tooltip only on mouseover output link 2/2 */
+    #output-link-envelope:hover #copy-tooltip {
+        visibility: visible; /* Show copy-tooltip only on mouseover output link 2/2 */
 
         /* Fade in gently pt 2/2 */
         opacity: 100%;
@@ -94,11 +94,11 @@
         function copyOutputLink(){
             let copyText = document.getElementById("output-link").textContent;
             navigator.clipboard.writeText(copyText);
-            document.getElementById("tooltip").textContent="Text Copied!";
+            document.getElementById("copy-tooltip").textContent="Text Copied!";
         }
 
-        function resetTooltip(){
-            document.getElementById("tooltip").textContent="Click to copy";
+        function resetCopyTooltip(){
+            document.getElementById("copy-tooltip").textContent="Click to copy";
 
         }
 
@@ -132,10 +132,15 @@
 
         //reset input link on tap
         function pasteInput(){
+
+            let inputLink = document.getElementById("input-link");
+
+            inputLink.value = "";
+
             navigator.clipboard.readText().then(
                 (pasteLink) => 
                 (
-                    document.getElementById("input-link").value = pasteLink
+                    inputLink.value = pasteLink
                 ),
             );
 
@@ -150,7 +155,7 @@
             //bind copy on clicking output-link
             outputlink.addEventListener("click", copyOutputLink);
 
-            document.getElementById("output-link-envelope").addEventListener("mouseleave", resetTooltip);
+            document.getElementById("output-link-envelope").addEventListener("mouseleave", resetCopyTooltip);
 
             //bind mechanism to unbloat button
             document.getElementById("unbloat").addEventListener("click", amazonLinkClean);
@@ -172,10 +177,10 @@
     <br>
 
     <div id="output-link-envelope">
-    <!--div envelope is for proper tooltip display-->
+    <!--div envelope is for proper copy-tooltip display-->
     <label for="output-link">Cleaned-up link:</label>
     <div id="output-link" readonly aria-live="polite" tabindex="0"></div>
-    <div id="tooltip" aria-live="polite">Click to copy</div>
+    <div id="copy-tooltip" aria-live="polite">Click to copy</div>
     </div>
     <!-- for blind- aria-lives clear refresh aria-relevant=all -->
 </body>
