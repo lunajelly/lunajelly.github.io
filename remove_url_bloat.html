@@ -87,66 +87,71 @@
 
     </style>
     <script>
-    
-    //copy output link on click
-    function copyOutputLink(){
-        let copyText = document.getElementById("output-link").textContent;
-        navigator.clipboard.writeText(copyText);
-        document.getElementById("tooltip").textContent="Text Copied!";
-    }
 
-    function resetTooltip(){
-        document.getElementById("tooltip").textContent="Click to copy";
 
-    }
-
-    //strip amzn link of ref
-    function amazonLinkClean() {
-        let inputLink = document.getElementById("input-link").value.trim(); //trim removes whitespace from begin&end
-
-        console.log(inputLink);
-
-        // remove the "ref=" gunk
-
-        let indexOfFirstChar = inputLink.lastIndexOf("/"); //Gives Index of the first character of the search string, search from end
-
-        if (indexOfFirstChar === -1){
-
-            document.getElementById("error").innerText = "Cannot find anything to unbloat.  If a link should have been cleaned up but wasn't, feel free to open an issue on GitHub with 'remove_url_bloat' in title & the link";
-
-            document.getElementById("output-link").textContent = inputLink;
-
-            return;
+        
+        //copy output link on click
+        function copyOutputLink(){
+            let copyText = document.getElementById("output-link").textContent;
+            navigator.clipboard.writeText(copyText);
+            document.getElementById("tooltip").textContent="Text Copied!";
         }
 
-        let outputLink = inputLink.substring(0,indexOfFirstChar);
+        function resetTooltip(){
+            document.getElementById("tooltip").textContent="Click to copy";
 
-        document.getElementById("output-link").textContent = outputLink;
+        }
 
-        document.getElementById("error").innerText = "";
+        //strip amzn link of ref
+        function amazonLinkClean() {
+            let inputLink = document.getElementById("input-link").value.trim(); //trim removes whitespace from begin&end
 
-        console.log(indexOfFirstChar);
+            console.log(inputLink);
 
-        console.log(outputLink);
- 
-        console.log("gg");
+            // remove the "ref=" gunk
 
-    }
+            let indexOfFirstChar = inputLink.lastIndexOf("/"); //Gives Index of the first character of the search string, search from end
 
-    //bind fns to interface
-    addEventListener("DOMContentLoaded", (event) => {
+            if (indexOfFirstChar === -1){
 
-        //output-link 
-        let outputlink = document.getElementById("output-link");
+                document.getElementById("error").innerText = "Cannot find anything to unbloat.  If a link should have been cleaned up but wasn't, feel free to open an issue on GitHub with 'remove_url_bloat' in title & the link";
 
-        //bind copy on clicking output-link
-        outputlink.addEventListener("click", copyOutputLink);
+                document.getElementById("output-link").textContent = inputLink;
 
-        document.getElementById("output-link-envelope").addEventListener("mouseleave", resetTooltip);
+                return;
+            }
 
-        //bind mechanism to unbloat button
-        document.getElementById("unbloat").addEventListener("click", amazonLinkClean);
-    });
+            let outputLink = inputLink.substring(0,indexOfFirstChar);
+
+            document.getElementById("output-link").textContent = outputLink;
+
+            document.getElementById("error").innerText = "";
+
+        }
+
+
+        //reset input link on tap
+        function resetInput(){
+            document.getElementById("input-link").value = "";
+        }
+
+        //bind fns to interface
+        addEventListener("DOMContentLoaded", (event) => {
+
+            //output-link 
+            let outputlink = document.getElementById("output-link");
+
+            //bind copy on clicking output-link
+            outputlink.addEventListener("click", copyOutputLink);
+
+            document.getElementById("output-link-envelope").addEventListener("mouseleave", resetTooltip);
+
+            //bind mechanism to unbloat button
+            document.getElementById("unbloat").addEventListener("click", amazonLinkClean);
+
+            //bind clear input on click
+            document.getElementById("input-link").addEventListener("focus", resetInput);
+        });
     </script>
 </head>
 <body>
