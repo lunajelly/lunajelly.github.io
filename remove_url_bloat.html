@@ -131,8 +131,14 @@
 
 
         //reset input link on tap
-        function resetInput(){
-            document.getElementById("input-link").value = "";
+        function pasteInput(){
+            navigator.clipboard.readText().then(
+                (pasteLink) => 
+                (
+                    document.getElementById("input-link").value = pasteLink
+                ),
+            );
+
         }
 
         //bind fns to interface
@@ -150,7 +156,7 @@
             document.getElementById("unbloat").addEventListener("click", amazonLinkClean);
 
             //bind clear input on click
-            document.getElementById("input-link").addEventListener("focus", resetInput);
+            document.getElementById("input-link").addEventListener("focus", pasteInput);
         });
     </script>
 </head>
@@ -159,7 +165,7 @@
     <p>Clean Amazon links of analytics bloat</p>
     <p id="disclaimer">*May do weird things to non-Amazon links</p>
     <label for="input-link">Enter link here:</label>
-    <input id="input-link" type="text"></input>
+    <input id="input-link" type="text" aria-live="polite"></input>
     <button id="unbloat" type="button" role="button" aria-pressed="false">Unbloat!</button>
     <br>
     <p id="error" aria-live="polite"></p>
