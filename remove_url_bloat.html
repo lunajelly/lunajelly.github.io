@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Remove bloat on Amazon links</title>
+	<title>Remove bloat on Amazon links</title>
 
-    <meta name="keywords" content="clean, amazon, analytics, bloat, links, unbloat, shorten">
-    <meta name="description" content="Clean Amazon links of analytics bloat">
-    
-    <!-- better be mobile friendly -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="clean, amazon, analytics, bloat, links, unbloat, shorten">
+	<meta name="description" content="Clean Amazon links of analytics bloat">
 
-    <style>
+	<!-- better be mobile friendly -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
+	<style>
+
+		body {
             font-size: medium;
         }
 
@@ -86,11 +87,11 @@
 
 
     </style>
-    <script>
+	<script>
 
 
-        
-        //copy output link on click
+
+		//copy output link on click
         function copyOutputLink(){
             let copyText = document.getElementById("output-link").textContent;
             navigator.clipboard.writeText(copyText);
@@ -101,26 +102,34 @@
             document.getElementById("copy-tooltip").textContent="Click to copy";
 
         }
+		
+
+		function nothingToBloat(inputLink){
+			 document.getElementById("error").innerText = "Cannot find anything to unbloat.  If a link should have been cleaned up but wasn't, feel free to open an issue on GitHub with 'remove_url_bloat' in title & the link";
+
+			document.getElementById("output-link").textContent = inputLink;
+
+		}
 
         //strip amzn link of ref
         function amazonLinkClean() {
             let inputLink = document.getElementById("input-link").value.trim(); //trim removes whitespace from begin&end
+			
+			
 
             console.log(inputLink);
 
             // remove the "ref=" gunk
 
-            let indexOfFirstChar = inputLink.lastIndexOf("/"); //Gives Index of the first character of the search string, search from end
+            let indexOfFirstChar = inputLink.lastIndexOf("/ref="); //Gives Index of the first character of the search string, search from end
 
             if (indexOfFirstChar === -1){
 
-                document.getElementById("error").innerText = "Cannot find anything to unbloat.  If a link should have been cleaned up but wasn't, feel free to open an issue on GitHub with 'remove_url_bloat' in title & the link";
-
-                document.getElementById("output-link").textContent = inputLink;
-
-                return;
+               nothingToBloat(inputLink);
+               return;
             }
-
+			
+			
             let outputLink = inputLink.substring(0,indexOfFirstChar);
 
             document.getElementById("output-link").textContent = outputLink;
@@ -165,28 +174,30 @@
         });
     </script>
 </head>
-<body>
-    <h1>Remove bloat on Amazon links</h1>
-    <p>Clean Amazon links of analytics bloat</p>
-    <p id="disclaimer">*May do weird things to non-Amazon links</p>
-    <label for="input-link">Enter link here:</label>
-    <input id="input-link" type="text" aria-live="polite"></input>
-    <button id="unbloat" type="button" role="button" aria-pressed="false">Unbloat!</button>
-    <br>
-    <p id="error" aria-live="polite"></p>
-    <br>
 
-    <div id="output-link-envelope">
-    <!--div envelope is for proper copy-tooltip display-->
-    <label for="output-link">Cleaned-up link:</label>
-    <div id="output-link" readonly aria-live="polite" tabindex="0"></div>
-    <div id="copy-tooltip" aria-live="polite">Click to copy</div>
-    </div>
-    <!-- for blind- aria-lives clear refresh aria-relevant=all -->
+<body>
+	<h1>Remove bloat on Amazon links</h1>
+	<p>Clean Amazon links of analytics bloat</p>
+	<p id="disclaimer">*May do weird things to non-Amazon links</p>
+	<label for="input-link">Enter link here:</label>
+	<input id="input-link" type="text" aria-live="polite"></input>
+	<button id="unbloat" type="button" role="button" aria-pressed="false">Unbloat!</button>
+	<br>
+	<p id="error" aria-live="polite"></p>
+	<br>
+
+	<div id="output-link-envelope">
+		<!--div envelope is for proper copy-tooltip display-->
+		<label for="output-link">Cleaned-up link:</label>
+		<div id="output-link" readonly aria-live="polite" tabindex="0"></div>
+		<div id="copy-tooltip" aria-live="polite">Click to copy</div>
+	</div>
+	<!-- for blind- aria-lives clear refresh aria-relevant=all -->
 </body>
 
 
 <!-- self-review: sick but solid, managed to not hurt hands further.
 cs  method: deck + vscode + ps4knockoff ctrller=14oz + tablet + voice2txt + gdoc
  s-->
+
 </html>
