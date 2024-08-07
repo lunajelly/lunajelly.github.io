@@ -119,9 +119,11 @@
 
             console.log(inputLink);
 
-            // remove the "ref=" gunk
+            // remove the "?..." gunk
 
-            let indexOfFirstChar = inputLink.lastIndexOf("/ref="); //Gives Index of the first character of the search string, search from end
+            let indexOfFirstChar = inputLink.lastIndexOf("?"); //Gives Index of the first character of the search string, search from end
+
+            
 
             if (indexOfFirstChar === -1){
 
