@@ -4,7 +4,6 @@
 <head>
 	<title>Remove bloat on Amazon links</title>
 
-        <meta name="google-site-verification" content="pucSHfxIw82OD9d4T0U2FMEDzU1uvOPkU7F6N28ujAI" />
 	<meta name="keywords" content="clean, amazon, analytics, bloat, links, unbloat, lunajelly, shorten">
 	<meta name="description" content="Clean Amazon links of analytics bloat">
 
@@ -106,11 +105,29 @@
 		
 
 		function nothingToBloat(inputLink){
-			 document.getElementById("error").innerText = "Cannot find anything to unbloat.  If a link should have been cleaned up but wasn't, feel free to open an issue on GitHub with 'remove_url_bloat' in title & the link";
 
 			document.getElementById("output-link").textContent = inputLink;
 
 		}
+
+        let cleaned = false;
+
+        function cleanByDiscardAfterLast(searchString, inputLink) {
+
+            let indexOfFirstChar = inputLink.lastIndexOf(searchString); //Gives Index of the first character of the search string, search from end
+
+            if (indexOfFirstChar === -1) //not found
+                return inputLink;
+
+            // otherwise;
+            cleaned = true;
+
+            return inputLink.substring(0,indexOfFirstChar);
+            
+            }
+
+        
+
 
         //strip amzn link of ref
         function amazonLinkClean() {
@@ -120,24 +137,22 @@
 
             console.log(inputLink);
 
-            // remove the "?..." gunk
+            // remove the "/ref=" gunk first 
+            let outputLink = cleanByDiscardAfterLast("/ref=",inputLink)
 
-            let indexOfFirstChar = inputLink.lastIndexOf("?"); //Gives Index of the first character of the search string, search from end
-
-            
-
-            if (indexOfFirstChar === -1){
-
-               nothingToBloat(inputLink);
-               return;
-            }
-			
-			
-            let outputLink = inputLink.substring(0,indexOfFirstChar);
+            // remove the "?..." gunk second
+            outputLink = cleanByDiscardAfterLast("?",outputLink)
 
             document.getElementById("output-link").textContent = outputLink;
 
-            document.getElementById("error").innerText = "";
+            // show if cleaned or not update error ui
+            if (cleaned)
+                document.getElementById("error").innerText = "";
+            else
+                document.getElementById("error").innerText = "Cannot find anything to unbloat.  If a link should have been cleaned up but wasn't, feel free to open an issue on GitHub with 'remove_url_bloat' in title & the link";
+
+
+
 
         }
 
