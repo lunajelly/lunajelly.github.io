@@ -90,6 +90,7 @@ memory leak somewhere.
 			animation-iteration-count: infinite;
 			color: orange;
 		}
+		
 
 		/* animation of xp*/
 		@-webkit-keyframes sweet_xp {
@@ -110,6 +111,18 @@ memory leak somewhere.
 			100% {
 				bottom: 100%;
 			}
+		}
+		
+		#levelupgz {
+			-webkit-text-stroke-width: 1px;
+			-webkit-text-stroke-color: gold;
+			color: #ddba07;
+			visibility: hidden;
+			font-weight: 1000;
+			background: -webkit-linear-gradient(#eacd34, #ffffff);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			font-family: serif;
 		}
 
 		#level_div {
@@ -137,7 +150,11 @@ memory leak somewhere.
 			position:absolute;
 			left:50%;
 			transform:translate(-50%,0); /*for centering */
-			bottom:4%;
+			bottom:2%;
+		}
+		
+		#dialog {
+			margin-bottom: 10px;
 		}
 		
 		
@@ -311,9 +328,11 @@ memory leak somewhere.
 
 			//time to level up!
 			if (percentage_num === 100) {
-				current_xp_bar.style.backgroundColor = "green";
+				current_xp_bar.style.backgroundColor = "Green";
 
 				console.log("bwevel");
+				document.getElementById("levelupgz").style.visibility = "visible";
+				
 
 
 
@@ -343,6 +362,12 @@ memory leak somewhere.
 				return;
 
 			}
+			
+			document.getElementById("current-xp-bar").style.backgroundColor = "gold";
+			
+			document.getElementById("levelupgz").style.visibility = "hidden";
+
+
 
 		}
 
@@ -421,7 +446,7 @@ memory leak somewhere.
 		</audio>
 	</figure>
 
-	<p>Level up!</p>
+	<p id = "levelupgz">   ⭐ Level up! ⭐</p>
 
 	<div id="xp-info"><span id="current-xp">0</span>/<span id="next-lvl-xp">1000</span>xp</div>    
 	<div id="xp-bar">
@@ -435,6 +460,7 @@ memory leak somewhere.
 
 	<p id="dialog">Dialog here</p>
 
+	<br>
 	<div id="action">
 		<button type="button" id="meditate">Meditate</button>
 		<button type="button" id="dakka" onclick="dakka()">Dakka</button>
