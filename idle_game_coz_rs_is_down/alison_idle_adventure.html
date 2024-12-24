@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<!-- an idle adventure 
+		cute character, that meditates or takes care of themselves, to the point of leveling up. 
+
+runescape is down so i whipped this up to scratch my idle game itch in the meantime since i'm too incompetent to find an idle game that won't tank my potato, prob due ot my illness. the other thing i have to do is dreary and upsetting so it'll help me thru it.
+
+
+https://www.w3schools.com/tags/tag_progress.asp progress
+
+
+certain paths unlock other paths.
+like time machine. -> medieval
+or isekai
+or fantasy
+or magic. 
+witchery
+
+
+Meditation: spirituality - unlocks magick.
+
+adventurer.
+
+Levels.
+
+
+various disciplines based on the pathway.
+Some pathways unlock due to different pathways.
+
+Fame: Nobody -> Legend.
+God: "goddess of smithing"
+
+Health: Horribly Sick -> Practically Immortal -> Immortal
+Combat: -> God of War
+Cuteness: -> Wong
+Merchant like x3 trade ranks. 
+reader pathway
+https://roguey.co.uk/x3tc/help/rankings.php
+Seer pathway -> The Fool. 
+god mode
+necromancer
+martial artist
+reader 
+sleeper
+
+Klein
+God
+
+The immortal 
+main of chinese immmortals just have long lives. 
+take care of yourself. 
+
+
+Maybe you can inventory sort or whatever during but right now.
+
+simplest version, just cute character.
+
+
+can make updated version with better stickies.
+
+
+scifi - combat power
+
+
+Dakka:  
+0 - Likely to be involved in an accidental death  
+1 - 
+
+
+memory leak somewhere.
+-->
+
+<head>
+	<style>
+		body {
+			text-align: center;
+		}
+
+		/* xp div */
+		#xp-div {
+			display:none;
+			/*display:block works */
+			position: absolute;
+			left: 50%;
+			bottom: 20%;
+			transform: translate(-50%, 0);
+			text-align: center;
+			white-space: nowrap;
+			-webkit-animation: sweet_xp 2s linear;
+			animation-iteration-count: infinite;
+			color: orange;
+		}
+
+		/* animation of xp*/
+		@-webkit-keyframes sweet_xp {
+			0% {
+				bottom: 45%;
+				transform: translate(-50%, 0);
+
+			}
+
+
+			90% {
+			bottom: 100%;
+			transform: translate(-50%, 0);
+
+			}
+
+
+			100% {
+				bottom: 100%;
+			}
+		}
+
+		#level_div {
+			text-align: center;
+			position: absolute;
+			bottom: 10%;
+			left: 50%;
+			transform: translate(-50%, 0);
+			/* transform is from stack overflow: https://stackoverflow.com/questions/7558642/left50-element-not-appearing-in-middle-of-page Muhammad Ilan's answer. idk what it does but it sure fixes the left thing to keep it centered. Apparently left 50% won't work without it because of the width of the element itself. .*/
+		}
+
+		img {
+			/*original is 500px*/
+			width: 150px;
+			height: 150px;
+			bottom: 20%;
+			left: 50%;
+			position: absolute;
+			transform: translate(-50%, 0);
+		}
+
+
+		/* the action buttons on the bottom. */
+		#action {
+			position:absolute;
+			left:50%;
+			transform:translate(-50%,0); /*for centering */
+			bottom:4%;
+		}
+		
+		
+		/* xp under the xp-bar*/ 
+		#xp-info {
+			top:18%;
+			position: absolute;
+			left:50%;
+			transform: translate(-50%,0);
+			font-size:12px;
+	
+		}
+		
+		
+		
+	
+		
+		/* Experience bar on the top */
+		#xp-bar {
+			top: 15%;
+			position: absolute;
+			left: 50%;
+			transform: translate(-50%, 0);
+			width: 120px;
+			height: 10px;
+			background-color:black;
+		}
+		
+		#current-xp-bar {
+			background-color:gold; /*gold when leveling, green when not*/
+			width:0%; /* I can do based on % of the xp bar.*/
+			height:10px;
+			transition: all .5s linear; /*animates the width% change called periodically from the javascript*/
+		}
+		
+		#total-xp-label {
+			padding-bottom: 5px;
+		}
+		#total-xp-div {
+			position: absolute;
+			right: 5%;
+			bottom: 5%;
+			font-size: 14;
+			color:#c4a811;
+		}
+		
+		
+		#audio-toggle {
+			float:right;
+			float: top;
+		}
+			/*everything that should not be shown */
+		#dialog, #meditate, #stop, #img-scifidakka,#title_container, #level_up_music, #xp-info, #mute {
+			display:none;
+		}
+
+
+		/* end css section */
+	</style>
+
+	<script type="application/javascript">
+		/*@sensory - called by the GUI.
+		 */
+
+
+		//if progressions have different sprite, then the title is the identifier and there's a check for if the title is in the original.
+		// if progressions have prereq
+		// i'm just going to add in a lot of my favorite fandoms willynilly and make shit up coz why not.
+		// clumsiness...
+
+		//@variable section.
+		var progressions = {
+			"dakka": {
+				img: "images/characater_dakka_scifi.png",
+				0: "A disaster waiting to happen",
+				10: "A danger to herself and others",
+				20: "A novice",
+				30: "Getting the hang of this",
+				40: "singlehanded",
+				50: "proficient",
+				60: "doublehanded",
+				70: "getting pretty good",
+				80: "gunwoman",
+				90: "sharpened claws",
+				100: "specialist",
+				110: "veteran",
+				300: "professional",
+				320: "Sarah Fortune's Level",
+				400: "Bullet Master",
+				500: "Dakka of the Alien Monsters",
+				700: "triplehanded",
+				800: "sharpshooter",
+				900: "sniper",
+				910: "Could be one of the Numbers",
+				940: "Train Heartnet's Level",
+				950: "better than Train Heartnet",
+				1000: "deadeye",
+				2000: "legend",
+				3000: "Goddess of Bullet Hell (MAX)"
+
+			},
+			"gardener": {
+				0: "all her plants die",
+				1: "novice gardener"
+			},
+			"keladry": {
+				0: "Noble",
+				1: "Probationary Page",
+				10: "Page",
+				20: "Page Year 2",
+				40: "Squire",
+				60: "Lady Knight",
+				70: "Commander of Haven",
+				100: "Legendary Commander (MAX)"
+			}
+		}
+		var xp_gain = 100; //constant by design.
+		var level_up_xp = 1000; //ben says 2000 is good; i agree for real purposes.
+		var level = 0;
+		var current_xp = 0;
+
+		var set_interval_id;
+		var audio = true;
+		var audio_volume = 0.2;
+
+
+		/*@sensory section */
+		//incompl @unlinked
+		// // function meditate() {
+		// document.getElementById("xp-bar").style.display = "block";
+		// }
+
+		//@runs periodically (called by interval)
+		function gain_xp() {
+
+			//update
+			current_xp = current_xp + xp_gain;
+
+			document.getElementById("current-xp").textContent = current_xp - level * level_up_xp;
+
+
+			document.getElementById("total-xp").textContent = current_xp;
+
+
+			console.log("current_xp");
+			console.log(current_xp - level * current_xp);
+
+
+			//update title. @specific
+			if (level in progressions.dakka) {
+				document.getElementById("title").textContent = progressions.dakka[level];
+			}
+
+
+			//width of xp bar is 120px.
+			//300 = current_xp/1000 *100 = percentage
+			//1300 = current_xp/1000 * 100 = 1.3 - levels (1) = .3
+			//tested, this should work
+			// will give something like, 30%.
+			var percentage_num = Math.floor((current_xp / level_up_xp - level) * 100);
+
+			var current_xp_bar = document.getElementById("current-xp-bar");
+
+			var progress_bar = percentage_num + "%"; //format is ~ "50%"
+			console.log(progress_bar)
+			current_xp_bar.style.width = progress_bar;
+
+			//			document.getElementById("current-xp-bar").style.backgroundColor = "Blue";
+			//			current_xp_bar.style.width = "10%";
+
+
+			//time to level up!
+			if (percentage_num === 100) {
+				current_xp_bar.style.backgroundColor = "green";
+
+				console.log("bwevel");
+
+
+
+				level++; //increment level and save it!
+
+				document.getElementById("level").textContent = level;
+
+
+				var level_up_music = document.getElementById("level_up_music");
+				level_up_music.volume = audio_volume;
+				
+				if (audio)
+					level_up_music.play();
+
+
+
+				current_xp_bar.style.width = "0%";
+				current_xp_bar.style.backgroundColor = "gold";
+
+
+
+				// apparently this (in) is the more robust check as of 2019 acc. to this: https://stackoverflow.com/questions/3390396/how-can-i-check-for-undefined-in-javascript
+				// I miss the ? of kotlin
+
+
+
+				return;
+
+			}
+
+		}
+
+		function dakka() {
+			document.getElementById("xp-info").style.display = "block";
+			document.getElementById("xp-div").style.display = "block";
+			document.getElementById("next-lvl-xp").textContent = level_up_xp;
+			document.getElementById("dakka").style.display = "none";
+			document.getElementById("stop").style.display = "block";
+			document.getElementById("img-scifidakka").style.display = "block";
+			document.getElementById("img-character").style.display = "none";
+			document.getElementById("title_container").style.display = "inline";
+
+
+
+			gain_xp();
+			//for the first one.
+			set_interval_id = setInterval(gain_xp, 2000); //2 seconds, shud be same as in css. Also wish could do this easy in python
+
+
+		}
+
+		//this is specialized to Dakka only right now.  
+		function cancel() {
+			//			var buttons = document.querySelector("#action").children;
+			//			^ this is for all elemnts of a children.  I'll be using this for general case after i chagne this for more than dakka-ing.
+			//			for (var i =0; i < children.length; i++){
+			//				buttons[i].style.display = "none";
+			//			}
+			document.getElementById("xp-div").style.display = "none";
+			document.getElementById("dakka").style.display = "block";
+			document.getElementById("stop").style.display = "none";
+			document.getElementById("img-scifidakka").style.display = "none";
+			document.getElementById("img-character").style.display = "block";
+			document.getElementById("title_container").style.display = "none";
+
+			clearInterval(set_interval_id);
+
+		}
+
+		
+
+		function audio_toggle() {
+
+			if (audio){
+//				console.log("audio"); //@test
+				document.getElementById("level_up_music").volume = 0;
+				document.getElementById("sound").style.display = "none";
+			document.getElementById("mute").style.display = "inline";
+				audio = false;
+
+			}
+			else {
+//					console.log("no audio"); //@test
+					document.getElementById("level_up_music").volume = audio_volume;
+					
+					document.getElementbyId("sound").style.display = "inline";
+					document.getElementById("sound").style.display = "inline";
+					document.getElementById("mute").style.display = "inline";
+					audio = true;
+				}
+		}
+
+		/* end sensory section */
+
+	</script>
+</head>
+
+<body>
+
+
+	<button id="audio-toggle" onclick="audio_toggle()"><span id="sound">🔈</span><span id="mute"> 🔇</span>
+	</button>
+	<figure>
+		<audio id="level_up_music" controls src="sounds/alison_levelup_jingle_piano.wav">
+		</audio>
+	</figure>
+
+	<p>Level up!</p>
+
+	<div id="xp-info"><span id="current-xp">0</span>/<span id="next-lvl-xp">1000</span>xp</div>    
+	<div id="xp-bar">
+		<div id="current-xp-bar"></div>
+	</div>
+
+	<div><img src="images/black_haired_character_with_glasses.png" alt="Nali" id="img-character">
+		<img src="images/characater_dakka_scifi.png" alt="dakka" id="img-scifidakka">
+	</div>
+	<div id="xp-div">+ <span id="xp">100</span> xp</div>
+
+	<p id="dialog">Dialog here</p>
+
+	<div id="action">
+		<button type="button" id="meditate">Meditate</button>
+		<button type="button" id="dakka" onclick="dakka()">Dakka</button>
+		<button type="button" id="stop" onclick="cancel()">Stop</button>
+	</div>
+
+	<div id="total-xp-div">
+		<div id="total-xp-label"><strong>Total XP</strong></div>
+		<div><span id="total-xp">0</span> xp</div>
+	</div>
+
+
+	<div id="level_div">Level <span id="level">0</span>
+		<div id="title_container">
+			<div id="title">A danger to all</div>
+		</div>
+	</div>
+</body>
+
+</html>
