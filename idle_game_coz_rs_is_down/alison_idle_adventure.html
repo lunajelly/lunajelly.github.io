@@ -328,12 +328,11 @@ memory leak somewhere.
 
 			//time to level up!
 			if (percentage_num === 100) {
-				current_xp_bar.style.backgroundColor = "Green";
+//				current_xp_bar.style.backgroundColor = "Green";
 
-				console.log("bwevel");
 				document.getElementById("levelupgz").style.visibility = "visible";
 				
-
+				document.getElementById("xp-info").style.color = "green";
 
 
 				level++; //increment level and save it!
@@ -357,6 +356,8 @@ memory leak somewhere.
 				// apparently this (in) is the more robust check as of 2019 acc. to this: https://stackoverflow.com/questions/3390396/how-can-i-check-for-undefined-in-javascript
 				// I miss the ? of kotlin
 
+
+				document.getElementById("xp-info").style.color = "black";
 
 
 				return;

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		
+		body {
+			background-color: black;
+			color: white;
+		}
+		p {
+			background-color: #3c3a3a;
+		}
+		
+		p:active {
+			color: #ff98ef;			
+			background-color: #472bde;
+
+		}
+		
+		p:hover {
+			color: #2392b4;
+		}
+		
+		div {
+			background-color: #18187b;
+
+			font-style: italic;
+		}
+
+
+	
+	
+	</style>
+<script>
+	//copy output link on click
+	function copyOutputLink(ele) {
+		let copyText = ele.textContent;
+		navigator.clipboard.writeText(copyText);
+			
+	}
+	
+//	addEventListener("DOMContentLoaded", (event) => {
+//		
+//		var allParas = Array.from(document.getElementsByTagName("p"));
+//		
+//		allParas.forEach((element) => element.addEventListener("click", copyOutputLink(this)));
+//
+//		
+//        });
+
+
+
+</script>
+	
+	</head>
+
+
+<body>
+	
+	<div id="copy-tooltip" aria-live="polite">>>Click a paragraph below to copy</div>
+
+	<p onclick="copyOutputLink(this)">进来。请随手关門。请不做什么东西我不问您。Come in. Shut the door. do not do anything extra.</p>
+	<p onclick="copyOutputLink(this)">别进来。Don't come in.</p>
+	
+	<p onclick="copyOutputLink(this)">Come in. Shut the door. do not do anything extra.</p>
+
+	<p onclick="copyOutputLink(this)">Don't come in.</p>
+	
+	<p onclick="copyOutputLink(this)">Noisy</p>
+	<p onclick="copyOutputLink(this)">Busy. Get back to you in a while.</p>
+	<p onclick="copyOutputLink(this)">Busy. Get back to you in a long while.</p>
+	<p onclick="copyOutputLink(this)">Busy. Get back to you in a short while.</p>
+
+	<p onclick="copyOutputLink(this)">What is it? Please text me, I can't use the phone. </p>
+	
+	<p onclick="copyOutputLink(this)">cd </p>
+
+
+	
+
+</body>
+
+</html>
