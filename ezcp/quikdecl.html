@@ -3,7 +3,6 @@
 
 <head>
 	<style>
-		
 		body {
 			background-color: black;
 			color: white;
@@ -11,21 +10,22 @@
 
 
 		}
+
 		p {
 			background-color: #3c3a3a;
 			width: 100%;
 		}
-		
+
 		p:active {
-			color: #ff98ef;			
+			color: #ff98ef;
 			background-color: #472bde;
 
 		}
-		
+
 		p:hover {
 			color: #2392b4;
 		}
-		
+
 		div {
 			background-color: #18187b;
 
@@ -34,56 +34,89 @@
 
 		}
 
-
-	
-	
 	</style>
-<script>
-	//copy output link on click
-	function copyOutputLink(ele) {
-		let copyText = ele.textContent;
-		navigator.clipboard.writeText(copyText);
-			
-	}
-	
-//	addEventListener("DOMContentLoaded", (event) => {
-//		
-//		var allParas = Array.from(document.getElementsByTagName("p"));
-//		
-//		allParas.forEach((element) => element.addEventListener("click", copyOutputLink(this)));
-//
-//		
-//        });
+	<script>
+		//copy output link on click
+		function copyOutputLink(ele) {
+			let copyText = ele.textContent;
+			navigator.clipboard.writeText(copyText);
 
+		}
 
+		//	addEventListener("DOMContentLoaded", (event) => {
+		//		
+		//		var allParas = Array.from(document.getElementsByTagName("p"));
+		//		
+		//		allParas.forEach((element) => element.addEventListener("click", copyOutputLink(this)));
+		//
+		//		
+		//        });
 
-</script>
-	
-	</head>
+	</script>
+
+</head>
 
 
 <body>
-	
+
 	<div id="copy-tooltip" aria-live="polite">>>Click a paragraph below to copy</div>
 
 	<p onclick="copyOutputLink(this)">进来。请随手关門。请不做什么东西我不问您。Come in. Shut the door. do not do anything extra.</p>
 	<p onclick="copyOutputLink(this)">别进来。Don't come in.</p>
-	
+
 	<p onclick="copyOutputLink(this)">Come in. Shut the door. do not do anything extra.</p>
 
 	<p onclick="copyOutputLink(this)">Don't come in.</p>
-	
-	<p onclick="copyOutputLink(this)">Noisy</p>
-	<p onclick="copyOutputLink(this)">Busy. Get back to you in a while.</p>
-	<p onclick="copyOutputLink(this)">Busy. Get back to you in a long while.</p>
-	<p onclick="copyOutputLink(this)">Busy. Get back to you in a short while.</p>
 
 	<p onclick="copyOutputLink(this)">What is it? Please text me, I can't use the phone. </p>
-	
+	<p onclick="copyOutputLink(this)">Busy. Get back to you in a while.</p>
+	<p onclick="copyOutputLink(this)">Busy. Get back to you in a long while.</p>
+	<p onclick="copyOutputLink(this)"> Get back to you in a moment.</p>
+
+	<p onclick="copyOutputLink(this)">Feeling poorly, get back to you on a good day.</p>
+
+
+	<p onclick="copyOutputLink(this)">Noisy</p>
+
+
+
+	<p onclick="copyOutputLink(this)">put food away</p>
+
+	<p onclick="copyOutputLink(this)">egg cheese beef breakfast sausage hashbrown Vitamin D b12</p>
+
+	<p onclick="copyOutputLink(this)">egg cheese beef breakfast sausage Vitamin D b12</p>
+
 	<p onclick="copyOutputLink(this)">cd </p>
 
+	<p onclick="copyOutputLink(this)">git remote </p>
 
-	
+	<p onclick="copyOutputLink(this)">git remote get-url origin</p>
+
+	<p onclick="copyOutputLink(this)">git config user.name</p>
+
+	<p onclick="copyOutputLink(this)">git config user.email</p>
+
+	<p onclick="copyOutputLink(this)">git add .</p>
+
+	<p onclick="copyOutputLink(this)">git reset</p>
+
+	<p onclick="copyOutputLink(this)">git diff --name-only --cached</p>
+
+
+	<p onclick="copyOutputLink(this)">git log</p>
+
+	<p onclick="copyOutputLink(this)">git commit -m ""</p>
+
+
+	<p onclick="copyOutputLink(this)">git push -u origin master</p>
+
+	<p onclick="copyOutputLink(this)">n</p>
+
+	<p onclick="copyOutputLink(this)">;</p>
+
+
+
+
 
 </body>
 
