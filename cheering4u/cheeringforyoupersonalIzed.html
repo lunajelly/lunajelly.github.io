@@ -11,37 +11,19 @@
 	<style>
 		#textbox {
 			text-align: center;
+			padding-top: 5vw;
 			user-select: none;
 		}
 
-		/*
-html,
-body {
-height: 100%;
-width: 100%;
-}*/
+		html,
+		body {
+			height: 100%;
+		}
 
-
-		.vertical-center {
-			/*			 https://www.w3schools.com/howto/howto_css_center-vertical.asp*/
+		ul.no-bullets {
+			list-style-type: none;
 			margin: 0;
-			position: absolute;
-			top: 50%;
-			-ms-transform: translateY(-50%);
-			transform: translateY(-50%);
-		}
-
-		p {
-			font-weight: 1000;
-			font-size: 10vw;
-		}
-
-		@media (1000px) {
-			p {
-				font-weight: 1000;
-				font-size: 50vw;
-			}
-
+			padding: 0;
 		}
 
 	</style>
@@ -114,8 +96,18 @@ width: 100%;
 	</script>
 </head>
 
-<body onclick="UIcheer()">
-	<p class="vertical-center" id="textbox"></p>
+<body>
+	<div>
+		<ul class="no-bullets">
+			<li><button>upload cheers here (file)</button></li>
+			<li><button>upload cheers here (copypaste)</button></li>
+		</ul>
+
+	</div>
+	<div onclick="UIcheer()">
+
+		<h1 id="textbox"></h1>
+	</div>
 
 </body>
 
