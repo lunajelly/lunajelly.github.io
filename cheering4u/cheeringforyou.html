@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta charset="utf-8" />
+
+
+
+	<!-- css-->
+	<style>
+		#textbox {
+			text-align: center;
+			padding-top: 5vw;
+			user-select: none;
+		}
+
+		html,
+		body {
+			height: 100%;
+		}
+
+	</style>
+
+	<script>
+		function cheerGenerator() {
+
+			// generate random # from 0 to #+1, in this case: 0-18.
+			var random = Math.floor(Math.random() * 21);
+
+			// value of random number determines message.
+			if (random === 0)
+				return "You can do it!";
+			if (random === 1)
+				return "You got this!";
+			if (random === 2)
+				return "Go You!";
+			if (random === 3)
+				return "Rooting 4 u!";
+			if (random === 4)
+				return "Gooooo YOU!";
+			if (random === 5)
+				return "Believe in the me that believes in you.";
+			if (random === 6)
+				return "Step by Step.";
+			if (random === 7)
+				return "Brick by Brick.";
+			if (random === 8)
+				return "Just keep swimming.";
+			if (random === 9)
+				return "Courage, [your name here]. Courage.";
+			if (random === 10)
+				return "Fight ON!"
+			if (random === 11)
+				return "頑張って！ Ganbatte! With determination, stick to it!"
+			if (random === 12)
+				return "加油！Jiā Yóu! Add fuel!"
+			if (random === 13)
+				return "Hang in there!"
+			if (random === 14)
+				return "Take heart."
+			if (random === 15)
+				return "No matter how hopeless it seems, there is always *something* you can do."
+			if (random === 16)
+				return "Just keep moving forward."
+			if (random === 17)
+				return "When a door shuts, a window opens."
+			if (random === 18)
+				return "Sparkles!"
+			if (random === 19)
+				return "Bit by Bit!"
+			if (random === 19)
+				return "Focus on what you *can* do."
+			if (random === 20)
+				return "If a wall appears, don't push thru. Walk around to the other side."
+
+
+
+
+
+		}
+
+		function UIcheer() {
+			document.getElementById("textbox").innerText = cheerGenerator();
+		}
+
+		addEventListener("DOMContentLoaded", (event) => {
+
+			UIcheer();
+
+		});
+
+	</script>
+</head>
+
+<body onclick="UIcheer()">
+	<h1 id="textbox"></h1>
+
+</body>
+
+
+
+</html>

@@ -228,33 +228,59 @@ memory leak somewhere.
 		//@variable section.
 		var progressions = {
 			"dakka": {
-				img: "images/characater_dakka_scifi.png",
+				img: "images/char_dakka_scifi_th.png",
 				0: "A disaster waiting to happen",
+				5: "Mikoto Mikoshiba, Love Hunter (whimper)",
+				7: "you THINK you're James Bond",
 				10: "A danger to herself and others",
+				15: "A red shirt",
 				20: "A novice",
-				30: "Getting the hang of this",
-				40: "singlehanded",
+				25: "At least you aren't Wraith food",
+				30: "Hey! You actually hit the Covenant grunt this time!",
+				40: "Yusuke Uremeshi & his pointer finger",
 				50: "proficient",
 				60: "doublehanded",
-				70: "getting pretty good",
-				80: "gunwoman",
-				90: "sharpened claws",
-				100: "specialist",
-				110: "veteran",
-				300: "professional",
+				70: "Getting the hang of this",
+				75: "singlehanded",
+				80: "Pink Devil",
+				85: "Sheriff Bart",
+				90: "Jim, the Waco Kid",
+				100: "professional",
+				105: "Dr. John Watson",
+				110: "specialist",
+				117: "Master Chief",
+				140: "Ranger Kirby",
+				150: "Nemo & Noa( White cat project)",
+				160: "samus",
+				180: "Leo (Trickster online)",
+				210: "Ivan",
+				220: "watson bbc",
+				230: "Caitlyn",
+				250: "Assassin Miku",
+				280: "General Zaroff",
+				300: "gunslinger",
+				310: "Big-game hunter Sanger Rainsford",
 				320: "Sarah Fortune's Level",
+				343: "Guilty Spark",
 				400: "Bullet Master",
+				410: "Cirno's light snow",
+				420: "Reimu Hakurei's Reprimand of Darkness & Light",
+				430: "Letty Whiterock's Frost",
+				450: "Alice Margatroid & Dolls",
+				460: "A Perfect Prismriver Ensemble Performance",
+				470: "Yuyuko Saigyouji, Deathbringer",
+				480: "Ran Yakumo's Fox's Funeral",
+				490: "Yukari Yakumo, the slippery chessmistress",
 				500: "Dakka of the Alien Monsters",
 				700: "triplehanded",
 				800: "sharpshooter",
-				900: "sniper",
 				910: "Could be one of the Numbers",
 				940: "Train Heartnet's Level",
 				950: "better than Train Heartnet",
 				1000: "deadeye",
-				2000: "legend",
+				1007: "007",
+				2000: "Legend",
 				3000: "Goddess of Bullet Hell (MAX)"
-
 			},
 			"gardener": {
 				0: "all her plants die",
@@ -328,10 +354,10 @@ memory leak somewhere.
 
 			//time to level up!
 			if (percentage_num === 100) {
-//				current_xp_bar.style.backgroundColor = "Green";
+				//				current_xp_bar.style.backgroundColor = "Green";
 
 				document.getElementById("levelupgz").style.visibility = "visible";
-				
+
 				document.getElementById("xp-info").style.color = "green";
 
 
@@ -342,7 +368,7 @@ memory leak somewhere.
 
 				var level_up_music = document.getElementById("level_up_music");
 				level_up_music.volume = audio_volume;
-				
+
 				if (audio)
 					level_up_music.play();
 
@@ -363,9 +389,9 @@ memory leak somewhere.
 				return;
 
 			}
-			
+
 			document.getElementById("current-xp-bar").style.backgroundColor = "gold";
-			
+
 			document.getElementById("levelupgz").style.visibility = "hidden";
 
 
@@ -409,27 +435,26 @@ memory leak somewhere.
 
 		}
 
-		
+
 
 		function audio_toggle() {
 
-			if (audio){
-//				console.log("audio"); //@test
+			if (audio) {
+				//				console.log("audio"); //@test
 				document.getElementById("level_up_music").volume = 0;
 				document.getElementById("sound").style.display = "none";
-			document.getElementById("mute").style.display = "inline";
+				document.getElementById("mute").style.display = "inline";
 				audio = false;
 
+			} else {
+				//					console.log("no audio"); //@test
+				document.getElementById("level_up_music").volume = audio_volume;
+
+				document.getElementbyId("sound").style.display = "inline";
+				document.getElementById("sound").style.display = "inline";
+				document.getElementById("mute").style.display = "inline";
+				audio = true;
 			}
-			else {
-//					console.log("no audio"); //@test
-					document.getElementById("level_up_music").volume = audio_volume;
-					
-					document.getElementbyId("sound").style.display = "inline";
-					document.getElementById("sound").style.display = "inline";
-					document.getElementById("mute").style.display = "inline";
-					audio = true;
-				}
 		}
 
 		/* end sensory section */
@@ -447,7 +472,7 @@ memory leak somewhere.
 		</audio>
 	</figure>
 
-	<p id = "levelupgz">   ⭐ Level up! ⭐</p>
+	<p id="levelupgz"> ⭐ Level up! ⭐</p>
 
 	<div id="xp-info"><span id="current-xp">0</span>/<span id="next-lvl-xp">1000</span>xp</div>    
 	<div id="xp-bar">
@@ -455,7 +480,7 @@ memory leak somewhere.
 	</div>
 
 	<div><img src="images/black_haired_character_with_glasses.png" alt="Nali" id="img-character">
-		<img src="images/characater_dakka_scifi.png" alt="dakka" id="img-scifidakka">
+		<img src="images/char_dakka_scifi_th.png" alt="dakka" id="img-scifidakka">
 	</div>
 	<div id="xp-div">+ <span id="xp">100</span> xp</div>
 
