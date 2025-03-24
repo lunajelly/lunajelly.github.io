@@ -22,14 +22,6 @@
 		}
 
 
-		.vertical-center {
-			/*			 https://www.w3schools.com/howto/howto_css_center-vertical.asp*/
-			margin: 0;
-			position: absolute;
-			top: 50%;
-			-ms-transform: translateY(-50%);
-			transform: translateY(-50%);
-		}
 
 		p {
 			font-weight: 1000;
@@ -47,6 +39,18 @@
 				user-select: none;
 			}
 
+			.vertical-center {
+				/*			 https://www.w3schools.com/howto/howto_css_center-vertical.asp*/
+				margin: 0;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-ms-transform: translateY(-50%);
+				transform: translateY(-50%);
+				-ms-transform: translateX(-50%);
+				transform: translateX(-50%);
+
+			}
 
 		}
 
@@ -121,7 +125,9 @@
 </head>
 
 <body onclick="UIcheer()">
-	<p class="vertical-center" id="textbox"></p>
+	<div>
+		<p class="vertical-center" id="textbox"></p>
+	</div>
 
 </body>
 
