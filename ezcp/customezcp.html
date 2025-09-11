@@ -80,21 +80,15 @@
 			ezcpDiv.appendChild(p);
 		}
 		
-
-		
 		function parseStringInputAppendAllEzcpPs(toBeEzcpStr) {
 			
 			const separator = document.getElementById("separator");
-
 			const toBeEzcpArr = toBeEzcpStr.split("\n");
 			
 			//clear Ezcp Div
 			document.getElementById("ezcp").innerHTML = "";
-
-			toBeEzcpArr.forEach(phrase => mkEzcpP(phrase));
-			
+			toBeEzcpArr.forEach(phrase => mkEzcpP(phrase));						
 		}
-		
 		
 		//--below called by ui stuff--
 		
@@ -103,7 +97,7 @@
 			let copyText = ele.textContent;
 			navigator.clipboard.writeText(copyText);
 		}
-		
+
 
 		
 		addEventListener("DOMContentLoaded", (event) => {
@@ -157,7 +151,6 @@
 		function clearCpInputBtnFn() {
 			document.getElementById("cpinput-div").innerHTML = "";
 		}
-
 
 		function cpInputBtnFn() {
 			const s = document.getElementById("tainput").value;
